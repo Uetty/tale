@@ -17,6 +17,10 @@
         <commonmark.version>0.11.0</commonmark.version>
         <rome.version>1.0</rome.version>
         <emoji.version>4.0.0</emoji.version>
+		<mysql.connector.version>5.1.36</mysql.connector.version>
+		<mybatis.version>3.4.1</mybatis.version>
+		<druid.version>1.1.10</druid.version>
+		<jdk.version>1.8</jdk.version>
     </properties>
 
     <dependencies>
@@ -81,6 +85,24 @@
             <scope>provided</scope>
         </dependency>
 
+		<dependency>
+		    <groupId>com.alibaba</groupId>
+		    <artifactId>druid</artifactId>
+		    <version>${druid.version}</version>
+		</dependency>
+		
+		<dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${mybatis.version}</version>
+        </dependency>
+		
+		<dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.connector.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -118,6 +140,9 @@
             <properties>
                 <profiles.active>prod</profiles.active>
             </properties>
+            <activation>
+       		    <jdk>${jdk.version}</jdk>
+            </activation>
             <build>
                 <resources>
                     <resource>
@@ -138,6 +163,7 @@
             <activation>
                 <!-- Set to activate this configuration by default -->
                 <activeByDefault>true</activeByDefault>
+       		    <jdk>${jdk.version}</jdk>
             </activation>
             <build>
                 <resources>
@@ -168,9 +194,9 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
             <plugin>
